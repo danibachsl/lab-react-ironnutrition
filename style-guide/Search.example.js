@@ -1,19 +1,19 @@
-// Style Guide:
-// In this file you can find a reference example of the structure
-// and content that the component should render.
-// Remember to import Ant Design components before using them.
-import { Divider, Input } from 'antd';
+import { useState } from 'react';
 
-// Iteration 5
-function Search(props) {
+function SearchFood(props) {
+  const [search, setSearch] = useState('');
+
+  const handleChange = (event) => {
+    setSearch(event.target.value);
+    props.searchFood(event.target.value);
+  };
+
   return (
-    <>
-      <Divider>Search</Divider>
-
-      <label>Search</label>
-      <Input value={undefined} type="text" onChange={() => {}} />
-    </>
+    <div>
+      <label htmlFor="search">Search:</label>
+      <input type="text" name="search" value={search} onChange={handleChange} />
+    </div>
   );
 }
 
-export default Search;
+export default SearchFood;

@@ -1,30 +1,54 @@
-// Style Guide:
-// In this file you can find a reference example of the structure
-// and content that the component should render.
-// Remember to import Ant Design components before using them.
-import { Divider, Input } from 'antd';
+import { useState } from 'react';
 
-// Iteration 4
-function AddFoodForm(props) {
+function AddFood(props) {
+  const [name, setName] = useState('');
+  const [calories, setCalories] = useState(0);
+  const [image, setImage] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.addFood({ name, calories, image });
+  };
+
+  const handleImage = (event) => {
+    setImage(event.target.value);
+  };
+
+  const handleName = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleCalories = (event) => {
+    setCalories(event.target.value);
+  };
+
   return (
-    <form>
-      <Divider>Add Food Entry</Divider>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="image">Picture: </label>
+        <input type="text" name="image" placeholder="insert url" value={image} onChange={handleImage} />
 
-      <label>Name</label>
-      <Input value={undefined} type="text" onChange={() => {}} />
+        <br />
 
-      <label>Image</label>
-      {/* render antd <Input /> type="text" here */}
+        <label htmlFor="name">Name: </label>
+        <input type="text" name="name" value={name} onChange={handleName} />
 
-      <label>Calories</label>
-      {/* render antd <Input /> type="number" here */}
+        <br />
 
-      <label>Servings</label>
-      {/* render antd <Input /> type="number" here */}
+        <label htmlFor="calories">Calories: </label>
+        <input
+          type="number"
+          name="calories"
+          value={calories}
+          onChange={handleCalories}
+        />
 
-      <button type="submit">Create</button>
-    </form>
+        <br />
+
+        <button type="submit">Add New Food</button>
+      </form>
+    </div>
   );
 }
 
-export default AddFoodForm;
+export default AddFood;
